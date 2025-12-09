@@ -335,6 +335,7 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
                  label="Foto vom Strategic Hub" 
                  containerClassName="h-full w-full absolute inset-0 !rounded-none !border-0"
                  aspectRatio="auto"
+                 initialImage="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Gemini_Generated_Image_cfl16bcfl16bcfl1.png?raw=true"
                />
                {/* Overlay Content */}
                <div className="absolute bottom-6 left-6 pointer-events-none z-20">

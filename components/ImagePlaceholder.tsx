@@ -5,8 +5,10 @@ interface ImagePlaceholderProps {
   id: string; // Unique ID for localStorage persistence
   label?: string;
   className?: string;
-  aspectRatio?: 'video' | 'square' | 'portrait' | 'wide';
+  aspectRatio?: 'video' | 'square' | 'portrait' | 'wide' | 'auto';
   containerClassName?: string;
+  initialImage?: string;
+  imageClassName?: string;
 }
 
 export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({ 
@@ -14,7 +16,9 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   label = "Foto hochladen", 
   className = "",
   aspectRatio = "video",
-  containerClassName = ""
+  containerClassName = "",
+  initialImage,
+  imageClassName = ""
 }) => {
   const [image, setImage] = useState<string | null>(null);
   const [isHovering, setIsHovering] = useState(false);
@@ -22,10 +26,14 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   const storageKey = `decision_driver_img_${id}`;
 
   useEffect(() => {
-    // Load from local storage on mount
+    // Load from local storage on mount, fallback to initialImage
     const saved = localStorage.getItem(storageKey);
-    if (saved) setImage(saved);
-  }, [id, storageKey]);
+    if (saved) {
+      setImage(saved);
+    } else if (initialImage) {
+      setImage(initialImage);
+    }
+  }, [id, storageKey, initialImage]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -48,8 +56,9 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
     e.preventDefault();
-    setImage(null);
     localStorage.removeItem(storageKey);
+    // Revert to initial image if available, otherwise clear
+    setImage(initialImage || null);
   };
 
   const aspectClasses = {
@@ -69,7 +78,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       <label className={`block w-full h-full cursor-pointer relative z-10 ${className}`}>
         {image ? (
           <>
-            <img src={image} alt="Uploaded content" className="w-full h-full object-cover animate-fade-in" />
+            <img src={image} alt="Uploaded content" className={`w-full h-full object-cover animate-fade-in ${imageClassName}`} />
             <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
               <Camera className="text-white mb-2" size={32} />
               <span className="text-white font-bold text-sm uppercase tracking-widest">Bild ändern</span>
@@ -78,7 +87,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
               <button 
                 onClick={handleRemove}
                 className="absolute top-4 right-4 p-2 bg-red-500/80 hover:bg-red-500 text-white rounded-full transition-colors z-20"
-                title="Bild entfernen"
+                title={initialImage ? "Zurücksetzen" : "Entfernen"}
               >
                 <X size={16} />
               </button>

@@ -13,22 +13,26 @@ const teamMembers = [
   {
     id: 'max',
     name: 'Max Mustermann',
-    role: 'Geschäftsführer - Unternehmensberater'
-  },
-  {
-    id: 'sebastian',
-    name: 'Sebastian Sample',
-    role: 'Unternehmensberater'
-  },
-  {
-    id: 'marion',
-    name: 'Marion Musterfrau',
-    role: 'Assistant'
+    role: 'Geschäftsführer - Unternehmensberater',
+    imageUrl: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Max%20Mustermann.PNG?raw=true'
   },
   {
     id: 'lara',
     name: 'Lara Lerner',
-    role: 'Praktikantin'
+    role: 'Stellvertretende Geschäftsführerin – Unternehmensberaterin',
+    imageUrl: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Lara%20Lerner.PNG?raw=true'
+  },
+  {
+    id: 'sebastian',
+    name: 'Sebastian Sample',
+    role: 'Unternehmensberater',
+    imageUrl: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Sebastian%20Sample.PNG?raw=true'
+  },
+  {
+    id: 'marion',
+    name: 'Marion Musterfrau',
+    role: 'Assistant',
+    imageUrl: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Marion%20Musterfrau.PNG?raw=true'
   }
 ];
 
@@ -49,6 +53,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
               label="Hintergrundbild (Groß)" 
               containerClassName="w-full h-full !rounded-none !border-none bg-main"
               aspectRatio="auto"
+              initialImage="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Gemini_Generated_Image_22f48i22f48i22f4.png?raw=true"
            />
            {/* Minimal overlay to blend colors slightly without darkening */}
            <div className="absolute inset-0 bg-blue-950/20 mix-blend-multiply pointer-events-none"></div>
@@ -128,6 +133,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                     label="Foto" 
                     aspectRatio="portrait"
                     containerClassName="!rounded-2xl !border-white/10"
+                    initialImage={member.imageUrl}
                   />
                 </div>
 

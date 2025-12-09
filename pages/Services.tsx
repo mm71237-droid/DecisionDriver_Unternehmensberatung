@@ -35,6 +35,7 @@ export const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
               label="Foto: Workshop / Strategie-Session"
               aspectRatio="wide"
               containerClassName="w-full h-full !rounded-none !border-0"
+              initialImage="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Teammeeting_Casual.png?raw=true"
            />
            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
            <div className="absolute bottom-6 left-6 z-20 pointer-events-none">

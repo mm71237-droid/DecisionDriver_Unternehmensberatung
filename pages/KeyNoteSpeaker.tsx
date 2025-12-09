@@ -49,6 +49,8 @@ export const KeyNoteSpeaker: React.FC<KeyNoteSpeakerProps> = ({ onNavigate }) =>
                             label="Keynote Speaker auf Bühne"
                             aspectRatio="portrait"
                             containerClassName="!rounded-none !border-0 w-full h-full"
+                            initialImage="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/KeyNote%20Publikum.png?raw=true"
+                            imageClassName="object-left"
                         />
                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent pointer-events-none"></div>
                          <div className="absolute bottom-8 left-8 right-8 text-white p-4 glass-card rounded-xl">
@@ -125,36 +127,17 @@ export const KeyNoteSpeaker: React.FC<KeyNoteSpeakerProps> = ({ onNavigate }) =>
                      </div>
                  </div>
 
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 h-[600px]">
-                     <div className="lg:col-span-2 lg:row-span-2 relative rounded-3xl overflow-hidden border border-white/10 group">
-                         <ImagePlaceholder
-                             id="gallery-main"
-                             label="Großes Bühnenbild"
-                             aspectRatio="auto"
-                             containerClassName="w-full h-full !rounded-none !border-0"
-                         />
-                         <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                             <div className="w-16 h-16 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                                 <Play size={24} fill="white" />
-                             </div>
-                         </div>
-                     </div>
-                     <div className="relative rounded-3xl overflow-hidden border border-white/10">
-                          <ImagePlaceholder
-                             id="gallery-side-1"
-                             label="Publikum / Workshop"
-                             aspectRatio="auto"
-                             containerClassName="w-full h-full !rounded-none !border-0"
-                         />
-                     </div>
-                     <div className="relative rounded-3xl overflow-hidden border border-white/10">
-                          <ImagePlaceholder
-                             id="gallery-side-2"
-                             label="Close-up Speaker"
-                             aspectRatio="auto"
-                             containerClassName="w-full h-full !rounded-none !border-0"
-                         />
-                     </div>
+                 <div className="w-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-black">
+                     <video 
+                         className="w-full h-auto aspect-video object-cover" 
+                         controls
+                         playsInline
+                         preload="metadata"
+                         poster="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/KeyNote%20Publikum.png?raw=true"
+                     >
+                         <source src="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/KeyNote%20Video.mp4?raw=true" type="video/mp4" />
+                         Ihr Browser unterstützt dieses Video-Format nicht.
+                     </video>
                  </div>
             </div>
         </section>
