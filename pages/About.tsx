@@ -1,89 +1,38 @@
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Button } from '../components/Button';
 import { Page } from '../types';
-import { Zap, Target, TrendingUp, ShieldCheck, Camera, User, Upload } from 'lucide-react';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+import { Zap, Target, TrendingUp, ShieldCheck } from 'lucide-react';
 
 interface AboutProps {
   onNavigate: (page: Page) => void;
 }
 
-interface TeamMember {
-  id: string;
-  name: string;
-  role: string;
-  image: string | null;
-}
-
-const initialTeam: TeamMember[] = [
+const teamMembers = [
   {
     id: 'max',
     name: 'Max Mustermann',
-    role: 'Geschäftsführer - Unternehmensberater',
-    image: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Max%20Mustermann.PNG?raw=true'
+    role: 'Geschäftsführer - Unternehmensberater'
   },
   {
     id: 'sebastian',
     name: 'Sebastian Sample',
-    role: 'Unternehmensberater',
-    image: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Sebastian%20Sample.PNG?raw=true'
+    role: 'Unternehmensberater'
   },
   {
     id: 'marion',
     name: 'Marion Musterfrau',
-    role: 'Assistant',
-    image: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Marion%20Musterfrau.PNG?raw=true'
+    role: 'Assistant'
   },
   {
     id: 'lara',
     name: 'Lara Lerner',
-    role: 'Praktikantin',
-    image: 'https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Lara%20Lerner.PNG?raw=true'
+    role: 'Praktikantin'
   }
 ];
 
-const STORAGE_KEY = 'decision_driver_team_data_v5';
-
 export const About: React.FC<AboutProps> = ({ onNavigate }) => {
-  // Initialize state from localStorage if available, otherwise use initialTeam
-  const [teamMembers, setTeamMembers] = useState<TeamMember[]>(() => {
-    try {
-      const savedData = localStorage.getItem(STORAGE_KEY);
-      if (savedData) {
-        return JSON.parse(savedData);
-      }
-    } catch (error) {
-      console.error('Failed to load team data from storage:', error);
-    }
-    return initialTeam;
-  });
-
-  const handleImageUpload = (id: string, event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const result = reader.result as string;
-        
-        setTeamMembers(prev => {
-          const updatedTeam = prev.map(member => 
-            member.id === id ? { ...member, image: result } : member
-          );
-          
-          // Save to localStorage immediately
-          try {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedTeam));
-          } catch (error) {
-            console.error('Failed to save image to storage (likely too large):', error);
-          }
-          
-          return updatedTeam;
-        });
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
     <div className="animate-fade-in pb-24 relative overflow-hidden">
        {/* Background Ambience */}
@@ -91,20 +40,21 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[100px]"></div>
        </div>
 
-      {/* Hero Banner with Image Background */}
+      {/* Hero Banner with Image Background Placeholder */}
       <div className="relative h-[60vh] min-h-[500px] flex items-end justify-center border-b border-white/5 bg-main overflow-hidden pb-16">
-        {/* Background Image Layer */}
+        {/* Background Image Placeholder Layer */}
         <div className="absolute inset-0 z-0">
-           <img 
-             src="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Teammeeting.png?raw=true" 
-             alt="Team Meeting DecisionDriver" 
-             className="w-full h-full object-cover"
+           <ImagePlaceholder 
+              id="about-hero-bg" 
+              label="Hintergrundbild (Groß)" 
+              containerClassName="w-full h-full !rounded-none !border-none bg-main"
+              aspectRatio="auto"
            />
            {/* Minimal overlay to blend colors slightly without darkening */}
-           <div className="absolute inset-0 bg-blue-950/20 mix-blend-multiply"></div>
+           <div className="absolute inset-0 bg-blue-950/20 mix-blend-multiply pointer-events-none"></div>
            
            {/* Gradient mainly at the bottom to merge with content */}
-           <div className="absolute inset-0 bg-gradient-to-t from-main via-main/20 to-transparent"></div>
+           <div className="absolute inset-0 bg-gradient-to-t from-main via-main/20 to-transparent pointer-events-none"></div>
         </div>
 
         {/* Hero Content */}
@@ -171,43 +121,14 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {teamMembers.map((member) => (
               <div key={member.id} className="glass-card p-6 rounded-3xl text-center group border border-white/5 hover:border-primary/30 transition-all duration-300">
-                {/* Photo Upload Area */}
-                <div className="relative w-32 h-32 mx-auto mb-6">
-                  <label 
-                    htmlFor={`upload-${member.id}`} 
-                    className="block w-full h-full rounded-2xl overflow-hidden cursor-pointer relative bg-white/5 border-2 border-white/10 group-hover:border-primary/50 transition-colors shadow-inner"
-                  >
-                    {member.image ? (
-                      <img 
-                        src={member.image} 
-                        alt={member.name} 
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-slate-600 bg-black/20">
-                        <User size={40} />
-                      </div>
-                    )}
-                    
-                    {/* Overlay for upload indication */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex flex-col items-center justify-center transition-opacity duration-300 backdrop-blur-sm">
-                       <Camera size={20} className="text-white mb-1" />
-                       <span className="text-[10px] uppercase font-bold text-white tracking-widest">Upload</span>
-                    </div>
-                  </label>
-                  <input 
-                    type="file" 
-                    id={`upload-${member.id}`} 
-                    accept="image/*" 
-                    className="hidden" 
-                    onChange={(e) => handleImageUpload(member.id, e)}
+                {/* Photo Upload Area using ImagePlaceholder */}
+                <div className="relative w-full aspect-[3/4] mx-auto mb-6 rounded-2xl overflow-hidden shadow-lg">
+                  <ImagePlaceholder 
+                    id={`team-member-${member.id}`} 
+                    label="Foto" 
+                    aspectRatio="portrait"
+                    containerClassName="!rounded-2xl !border-white/10"
                   />
-                  {/* Plus badge if no image */}
-                  {!member.image && (
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-primary rounded-xl rotate-3 flex items-center justify-center text-white border-4 border-surface shadow-lg pointer-events-none group-hover:scale-110 transition-transform">
-                      <Upload size={14} />
-                    </div>
-                  )}
                 </div>
 
                 <h3 className="text-lg font-bold text-white mb-2">{member.name}</h3>
@@ -226,7 +147,7 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
             <p className="text-slate-400 mb-8 max-w-lg mx-auto">
                Überzeugen Sie sich in einem persönlichen Gespräch von unserer Expertise.
             </p>
-            <Button variant="primary" onClick={() => onNavigate(Page.Contact)}>
+            <Button variant="primary" onClick={() => onNavigate(Page.Contact)} className="mx-auto">
               Jetzt Beratung anfragen
             </Button>
           </div>

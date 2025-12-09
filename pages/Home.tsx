@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { Page } from '../types';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
 import { Zap, Target, TrendingUp, ArrowRight, ShieldCheck, Activity, BrainCircuit, MapPin, Users } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
@@ -26,14 +27,6 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <div className="fixed inset-0 pointer-events-none">
         {/* Background Image Layer */}
         <div className="absolute inset-0 z-0">
-             <img 
-                src="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Firmengeb%C3%A4ude.png?raw=true" 
-                alt="Firmengebäude" 
-                className="w-full h-full object-cover opacity-20"
-                onError={(e) => {
-                    e.currentTarget.style.display = 'none';
-                }}
-             />
              {/* Dark overlay for readability - stronger on left where text is */}
              <div className="absolute inset-0 bg-main/60"></div>
              <div className="absolute inset-0 bg-gradient-to-r from-main via-main/95 to-main/70"></div>
@@ -334,19 +327,24 @@ export const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <section className="py-24 relative z-10">
         <div className="max-w-7xl mx-auto px-6">
           <div className="glass-card rounded-3xl overflow-hidden border border-white/10 grid lg:grid-cols-2">
-            <div className="relative h-64 lg:h-auto group bg-black/40">
-               <img 
-                 src="https://github.com/mm71237-droid/DecisionDriver_Unternehmensberatung/blob/main/Firmengeb%C3%A4ude.png?raw=true" 
-                 alt="DecisionDriver Headquarters Salzburg" 
-                 className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105"
+            
+            {/* Replaced static div with ImagePlaceholder for "Hub" */}
+            <div className="relative min-h-[300px] lg:h-full bg-black/40 p-4 flex flex-col justify-end">
+               <ImagePlaceholder 
+                 id="home-headquarters-img" 
+                 label="Foto vom Strategic Hub" 
+                 containerClassName="h-full w-full absolute inset-0 !rounded-none !border-0"
+                 aspectRatio="auto"
                />
-               <div className="absolute inset-0 bg-gradient-to-t from-main/90 to-transparent lg:bg-gradient-to-r lg:from-main/20 pointer-events-none"></div>
-               <div className="absolute bottom-6 left-6">
+               {/* Overlay Content */}
+               <div className="absolute bottom-6 left-6 pointer-events-none z-20">
                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-xs font-medium text-white mb-2 shadow-lg">
                    <MapPin size={12} className="text-primary" /> Salzburg, Österreich
                  </div>
                </div>
+               <div className="absolute inset-0 bg-gradient-to-t from-main/90 via-transparent to-transparent pointer-events-none z-10"></div>
             </div>
+
             <div className="p-8 lg:p-12 flex flex-col justify-center bg-black/20">
               <h3 className="text-2xl font-bold text-white mb-4">Strategic Hub Salzburg</h3>
               <p className="text-slate-400 mb-8 leading-relaxed">

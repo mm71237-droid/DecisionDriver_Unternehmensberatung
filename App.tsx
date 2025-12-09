@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { Services } from './pages/Services';
 import { BestPractices } from './pages/BestPractices';
+import { KeyNoteSpeaker } from './pages/KeyNoteSpeaker';
 import { About } from './pages/About';
 import { Contact } from './pages/Contact';
 import { Page } from './types';
@@ -23,6 +24,8 @@ const App: React.FC = () => {
         return <Services onNavigate={setCurrentPage} />;
       case Page.BestPractices:
         return <BestPractices onNavigate={setCurrentPage} />;
+      case Page.KeyNoteSpeaker:
+        return <KeyNoteSpeaker onNavigate={setCurrentPage} />;
       case Page.About:
         return <About onNavigate={setCurrentPage} />;
       case Page.Contact:

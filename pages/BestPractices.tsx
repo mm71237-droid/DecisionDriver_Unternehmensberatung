@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '../components/Button';
 import { Page } from '../types';
@@ -194,7 +195,7 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
 
       <div className="max-w-3xl mx-auto px-6 mt-24 text-center relative z-10">
         <h3 className="text-2xl font-bold text-white mb-8">Sie wollen ähnliche Ergebnisse?</h3>
-        <Button onClick={() => onNavigate(Page.Contact)} variant="glow" size="lg">
+        <Button onClick={() => onNavigate(Page.Contact)} variant="glow" size="lg" className="mx-auto">
           Weitere Best Practices anfragen
         </Button>
       </div>

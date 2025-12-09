@@ -1,6 +1,8 @@
+
 import React from 'react';
 import { Button } from '../components/Button';
 import { Page } from '../types';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
 import { Microscope, Activity, BarChart3, Users, ArrowRight } from 'lucide-react';
 
 interface ServicesProps {
@@ -22,6 +24,22 @@ export const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
           <p className="text-xl text-slate-400 max-w-3xl mx-auto">
             Unsere Beratungsleistungen beschleunigen Ihre Entscheidungen, minimieren Risiken und liefern messbare Ergebnisse in komplexen Umfeldern.
           </p>
+        </div>
+      </div>
+      
+      {/* Visual Break / Placeholder for Action Shot */}
+      <div className="max-w-7xl mx-auto px-6 mt-12 mb-8 relative z-10">
+        <div className="w-full h-64 md:h-96 rounded-3xl overflow-hidden shadow-2xl border border-white/10 relative group">
+           <ImagePlaceholder 
+              id="services-workshop-action"
+              label="Foto: Workshop / Strategie-Session"
+              aspectRatio="wide"
+              containerClassName="w-full h-full !rounded-none !border-0"
+           />
+           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none z-10"></div>
+           <div className="absolute bottom-6 left-6 z-20 pointer-events-none">
+              <span className="text-xs font-bold text-white/80 uppercase tracking-widest border border-white/20 px-3 py-1 rounded-full backdrop-blur-md">In Action</span>
+           </div>
         </div>
       </div>
 
@@ -86,7 +104,7 @@ export const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 mt-20 text-center relative z-10">
-        <Button size="lg" onClick={() => onNavigate(Page.Contact)} variant="glow">
+        <Button size="lg" onClick={() => onNavigate(Page.Contact)} variant="glow" className="mx-auto">
           Jetzt Leistungspaket anfragen
         </Button>
       </div>

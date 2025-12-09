@@ -26,6 +26,7 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
   const navItems: NavItem[] = [
     { label: 'Home', page: Page.Home },
     { label: 'Leistungen', page: Page.Services },
+    { label: 'Keynote Speaker', page: Page.KeyNoteSpeaker },
     { label: 'Best Practices', page: Page.BestPractices },
     { label: 'Über uns', page: Page.About },
     { label: 'Kontakt', page: Page.Contact },
