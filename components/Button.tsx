@@ -1,7 +1,8 @@
+
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'glow';
+  variant?: 'primary' | 'secondary' | 'outline' | 'glow' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
   children: React.ReactNode;
 }
@@ -13,13 +14,15 @@ export const Button: React.FC<ButtonProps> = ({
   className = '',
   ...props 
 }) => {
-  const baseStyles = "font-medium transition-all duration-300 rounded-full flex items-center justify-center gap-2 relative overflow-hidden group";
+  const baseStyles = "font-medium transition-all duration-300 rounded-full flex items-center justify-center gap-2 relative overflow-hidden active:scale-95";
   
   const variants = {
-    primary: "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/25 hover:shadow-primary/50 hover:scale-[1.02] border border-transparent",
-    secondary: "bg-white/10 text-white hover:bg-white/20 border border-white/10 backdrop-blur-sm",
-    outline: "bg-transparent border border-white/20 text-white hover:border-white/50 hover:bg-white/5",
-    glow: "bg-black text-white border border-primary/50 shadow-[0_0_15px_rgba(59,130,246,0.5)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)]"
+    // Using specific RGB (15, 23, 42)
+    primary: "bg-[rgb(15,23,42)] text-white hover:bg-[rgb(30,41,59)] shadow-lg shadow-slate-900/30 border border-transparent",
+    secondary: "bg-white text-[rgb(15,23,42)] hover:bg-slate-50 border border-slate-200 shadow-sm",
+    outline: "bg-transparent border border-slate-300 text-[rgb(15,23,42)] hover:border-[rgb(15,23,42)] hover:text-[rgb(15,23,42)] hover:bg-slate-50",
+    glow: "bg-[rgb(15,23,42)] text-white shadow-[0_0_20px_rgba(2,132,199,0.4)] hover:shadow-[0_0_30px_rgba(2,132,199,0.6)] hover:bg-[rgb(30,41,59)]",
+    ghost: "bg-transparent text-[rgb(15,23,42)] hover:text-[rgb(15,23,42)]"
   };
 
   const sizes = {
@@ -34,9 +37,6 @@ export const Button: React.FC<ButtonProps> = ({
       {...props}
     >
       <span className="relative z-10 flex items-center gap-2">{children}</span>
-      {variant === 'primary' && (
-        <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 blur-md"></div>
-      )}
     </button>
   );
 };

@@ -21,6 +21,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
   imageClassName = ""
 }) => {
   const [image, setImage] = useState<string | null>(null);
+  const [hasError, setHasError] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
 
   const storageKey = `decision_driver_img_${id}`;
@@ -34,6 +35,11 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       setImage(initialImage);
     }
   }, [id, storageKey, initialImage]);
+
+  // Reset error state when image source changes
+  useEffect(() => {
+    setHasError(false);
+  }, [image]);
 
   const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -69,6 +75,8 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
     auto: ''
   };
 
+  const showImage = image && !hasError;
+
   return (
     <div 
       className={`relative overflow-hidden group rounded-2xl bg-white/5 border-2 border-dashed border-white/10 transition-all duration-300 ${aspectClasses[aspectRatio as keyof typeof aspectClasses] || ''} ${containerClassName}`}
@@ -76,9 +84,15 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       onMouseLeave={() => setIsHovering(false)}
     >
       <label className={`block w-full h-full cursor-pointer relative z-10 ${className}`}>
-        {image ? (
+        {showImage ? (
           <>
-            <img src={image} alt="Uploaded content" className={`w-full h-full object-cover animate-fade-in ${imageClassName}`} />
+            <img 
+              src={image} 
+              alt={label} 
+              referrerPolicy="no-referrer"
+              onError={() => setHasError(true)}
+              className={`w-full h-full object-cover animate-fade-in ${imageClassName}`} 
+            />
             <div className={`absolute inset-0 bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center transition-opacity duration-300 ${isHovering ? 'opacity-100' : 'opacity-0'}`}>
               <Camera className="text-white mb-2" size={32} />
               <span className="text-white font-bold text-sm uppercase tracking-widest">Bild ändern</span>
@@ -106,7 +120,7 @@ export const ImagePlaceholder: React.FC<ImagePlaceholderProps> = ({
       </label>
       
       {/* Decorative corner accents if empty */}
-      {!image && (
+      {!showImage && (
         <>
           <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-white/20 rounded-tl-lg m-2 pointer-events-none"></div>
           <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-white/20 rounded-tr-lg m-2 pointer-events-none"></div>
