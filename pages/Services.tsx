@@ -176,7 +176,7 @@ export const Services: React.FC<ServicesProps> = ({ onNavigate }) => {
             </div>
 
             <div className="mt-16 flex justify-center relative z-10">
-               <Button variant="primary" className="bg-white text-slate-900 hover:bg-slate-100" onClick={() => onNavigate(Page.Contact)}>
+               <Button variant="primary" className="!bg-sky-500 !text-white hover:!bg-sky-400 shadow-[0_0_30px_rgba(14,165,233,0.4)] border-none" onClick={() => onNavigate(Page.Contact)}>
                   Projektanfrage starten
                </Button>
             </div>

@@ -2,7 +2,8 @@
 import React from 'react';
 import { Button } from '../components/Button';
 import { Page } from '../types';
-import { TrendingUp, Clock, CheckCircle, ArrowUpRight } from 'lucide-react';
+import { ImagePlaceholder } from '../components/ImagePlaceholder';
+import { TrendingUp, Clock, CheckCircle, ArrowUpRight, Quote } from 'lucide-react';
 import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 interface BestPracticesProps {
@@ -20,6 +21,33 @@ const dataY = [
 ];
 
 export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
+  const testimonials = [
+    {
+      id: 'palfinger',
+      name: 'Andreas Klauser',
+      role: 'CEO, Palfinger AG',
+      quote: "Die strategische Weitsicht von DecisionDriver hat unsere digitale Transformation entscheidend beschleunigt. Ein Partner auf Augenhöhe, der Technologie und Business versteht.",
+      image: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Andreas_Klauser_.jpg",
+      logo: "https://pngsource.in/assets/thumbnails/Palfinger-Logo-Pngsource-4A75EAWC.png"
+    },
+    {
+      id: 'salzburgag',
+      name: 'Michael Baminger',
+      role: 'CEO, Salzburg AG',
+      quote: "Datenbasierte Entscheidungen sind im Energiesektor der Zukunft essentiell. DecisionDriver liefert genau die analytische Klarheit, die wir für unsere Green-Tech-Offensive brauchen.",
+      image: "https://media.licdn.com/dms/image/v2/D4D03AQH9YS6a2S9L6g/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696775033355?e=2147483647&v=beta&t=RLxKBye3Z0be2l6M8QudDZ6Riha3pmWuR6Z7MNcMTtA",
+      logo: "https://presse.salzburg-ag.at/Content/305031/749eb74d-bae9-4d0b-ad0e-f9b8b2eda62c/1200/2400/.jpg"
+    },
+    {
+      id: 'stiegl',
+      name: 'Dr. Dieter Kiener',
+      role: 'Eigentümer, Stieglbrauerei',
+      quote: "Tradition und Innovation zu verbinden erfordert Fingerspitzengefühl und harte Fakten. DecisionDriver hat uns geholfen, unsere Supply Chain neu zu denken, ohne unsere Wurzeln zu vergessen.",
+      image: "https://falstaff.b-cdn.net/storage/2018/11/Dr-Heinrich-Dieter-Kiener-c-Marco-Riebler-1920.jpg",
+      logo: "https://www.stiegl.at/wp-content/uploads/2022/01/gruppe-440.png.webp"
+    }
+  ];
+
   return (
     <div className="animate-fade-in pb-24 relative bg-main">
        {/* Background Ambience */}
@@ -37,26 +65,26 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
 
       <div className="max-w-7xl mx-auto px-6 space-y-24 relative z-10">
         
-        {/* Case 1 */}
+        {/* Case 1: Porsche Holding */}
         <div className="glass-card p-8 lg:p-12 rounded-3xl bg-white border border-slate-100">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="inline-block px-3 py-1 bg-blue-50 text-primary text-xs font-bold tracking-wider uppercase rounded-sm">
-                Logistik & Supply Chain
+                Automotive Retail
               </div>
-              <h2 className="text-3xl font-bold text-slate-900 leading-tight">Unternehmen X: <br/>Beschleunigung von Genehmigungsprozessen</h2>
+              <h2 className="text-3xl font-bold text-slate-900 leading-tight">Porsche Holding (Salzburg): <br/>Beschleunigung der Netz-Transformation</h2>
               
               <div className="space-y-4">
                 <div className="p-6 bg-slate-50 rounded-xl border-l-2 border-red-400">
                   <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">Problem</h4>
                   <p className="text-slate-900">
-                    Langwierige interne Abstimmungen und fehlende Datentransparenz verzögerten eine kritische Standorterweiterung um 8 Monate.
+                    Die strategische Umstellung auf das Agenturmodell erforderte komplexe Genehmigungsverfahren für Investitionen in hunderten Händlerstandorten. Manuelle Prüfungen führten zu einem massiven "Investment Backlog".
                   </p>
                 </div>
                 <div className="p-6 bg-blue-50/50 rounded-xl border-l-2 border-primary">
                   <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">Lösung</h4>
                   <p className="text-slate-900">
-                    Implementierung datengetriebener Modelle zur Echtzeit-Visualisierung der Supply-Chain-Auswirkungen.
+                    Einführung eines KI-gestützten "Investment Approval Engines". Automatischer Abgleich von CAPEX-Anträgen mit lokalen Marktdaten und Konzernvorgaben in Echtzeit.
                   </p>
                 </div>
               </div>
@@ -64,15 +92,15 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
               <div className="flex gap-12 pt-4 border-t border-slate-100">
                 <div>
                   <div className="text-4xl font-bold text-primary mb-1 flex items-center gap-2">
-                    -50%
+                    -60%
                   </div>
-                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Entscheidungszeit</div>
+                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Durchlaufzeit</div>
                 </div>
                 <div>
                   <div className="text-4xl font-bold text-slate-900 mb-1 flex items-center gap-2">
-                    +15%
+                    € 18M
                   </div>
-                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">ROI</div>
+                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Liquiditäts-Effekt</div>
                 </div>
               </div>
             </div>
@@ -101,11 +129,11 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
                     <div>
                       <div className="flex justify-between text-xs text-slate-900 mb-2 font-bold">
                         <span>DecisionDriver</span>
-                        <span className="text-primary">16 Wochen</span>
+                        <span className="text-primary">12 Wochen</span>
                       </div>
                       <div className="h-3 bg-blue-50 rounded-full overflow-hidden relative">
                          <div className="absolute top-0 left-0 h-full w-full bg-primary/10 animate-pulse"></div>
-                         <div className="h-full bg-primary w-1/2 rounded-full relative z-10 shadow-lg shadow-blue-500/30"></div>
+                         <div className="h-full bg-primary w-[37.5%] rounded-full relative z-10 shadow-lg shadow-blue-500/30"></div>
                       </div>
                     </div>
                  </div>
@@ -119,26 +147,26 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Case 2 */}
+        {/* Case 2: Sandoz Kundl */}
         <div className="glass-card p-8 lg:p-12 rounded-3xl bg-white border border-slate-100">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="lg:order-2 space-y-8">
               <div className="inline-block px-3 py-1 bg-emerald-50 text-emerald-600 text-xs font-bold tracking-wider uppercase rounded-sm">
-                Automotive & Produktion
+                Pharma & Life Sciences
               </div>
-              <h2 className="text-3xl font-bold text-slate-900 leading-tight">Unternehmen Y: <br/>Investitionssicherheit bei Innovation</h2>
+              <h2 className="text-3xl font-bold text-slate-900 leading-tight">Sandoz (Kundl): <br/>Investitionssicherheit bei Großprojekten</h2>
               
               <div className="space-y-4">
                 <div className="p-6 bg-slate-50 rounded-xl border-l-2 border-red-400">
                    <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">Problem</h4>
                    <p className="text-slate-900">
-                    Unsichere Datenlage bei einer geplanten Multi-Millionen-Investition in eine neue Fertigungsstraße.
+                    Die geplante Erweiterung der Bio-Tech-Produktion in Kundl war hohen Risiken ausgesetzt. Volatile Energiemärkte und Lieferketten-Engpässe drohten das Multi-Millionen-Projekt unwirtschaftlich zu machen.
                   </p>
                 </div>
                 <div className="p-6 bg-blue-50/50 rounded-xl border-l-2 border-primary">
                    <h4 className="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">Lösung</h4>
                    <p className="text-slate-900">
-                    Evidenzbasierte Szenario-Simulation (Monte Carlo) und Stresstests der Business Cases.
+                    Entwicklung eines "Digital Strategic Twin" für die Investition. Durch Monte-Carlo-Simulation von 50.000 Marktszenarien wurde das Anlagendesign resilient gegen Preisschocks optimiert.
                   </p>
                 </div>
               </div>
@@ -146,15 +174,15 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
               <div className="flex gap-12 pt-4 border-t border-slate-100">
                 <div>
                   <div className="text-4xl font-bold text-primary mb-1 flex items-center gap-2">
-                    0
+                    98%
                   </div>
-                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Blind Spots</div>
+                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Planungssicherheit</div>
                 </div>
                 <div>
                   <div className="text-4xl font-bold text-slate-900 mb-1 flex items-center gap-2">
-                    € 2M
+                    € 12.5M
                   </div>
-                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">Einsparung</div>
+                  <div className="text-xs text-slate-900 font-medium uppercase tracking-widest">CAPEX Einsparung</div>
                 </div>
               </div>
             </div>
@@ -192,7 +220,60 @@ export const BestPractices: React.FC<BestPracticesProps> = ({ onNavigate }) => {
 
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 mt-24 text-center relative z-10">
+      {/* NEW: Testimonials Section */}
+      <section className="py-24 relative z-10">
+         <div className="max-w-7xl mx-auto px-6 text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">Stimmen aus der Wirtschaft</h2>
+            <p className="text-xl text-slate-900 max-w-2xl mx-auto">
+               Erfolg misst sich an der Zufriedenheit unserer Partner.
+            </p>
+         </div>
+
+         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {testimonials.map((t) => (
+              <div key={t.id} className="bg-white rounded-[2rem] p-8 border border-slate-100 shadow-xl shadow-blue-900/5 hover:-translate-y-1 transition-transform duration-300 flex flex-col h-full relative group">
+                 {/* Header with Logo & Quote Icon */}
+                 <div className="flex justify-between items-start mb-8 h-20">
+                     <div className="w-48 h-full relative">
+                        <ImagePlaceholder 
+                           id={`logo-${t.id}`}
+                           label="Logo"
+                           aspectRatio="auto"
+                           containerClassName="!rounded-none !border-0 w-full h-full !bg-transparent"
+                           initialImage={t.logo}
+                           imageClassName="!object-contain !object-left"
+                        />
+                     </div>
+                     <div className="text-blue-100 group-hover:text-blue-50 transition-colors">
+                        <Quote size={40} fill="currentColor" />
+                     </div>
+                 </div>
+
+                 <p className="text-slate-600 text-lg leading-relaxed italic mb-8 relative z-10 flex-grow">
+                    "{t.quote}"
+                 </p>
+
+                 <div className="mt-auto flex items-center gap-4 pt-6 border-t border-slate-50">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-slate-100 shrink-0">
+                       <ImagePlaceholder 
+                          id={`testimonial-${t.id}`}
+                          label="Foto"
+                          aspectRatio="square"
+                          initialImage={t.image}
+                          containerClassName="!rounded-none !border-0 w-full h-full"
+                       />
+                    </div>
+                    <div>
+                       <div className="font-bold text-slate-900">{t.name}</div>
+                       <div className="text-sm text-primary font-medium">{t.role}</div>
+                    </div>
+                 </div>
+              </div>
+            ))}
+         </div>
+      </section>
+
+      <div className="max-w-3xl mx-auto px-6 mt-12 text-center relative z-10">
         <h3 className="text-2xl font-bold text-slate-900 mb-8">Sie wollen ähnliche Ergebnisse?</h3>
         {/* Glow variant updated in Button.tsx to use dark blue */}
         <Button onClick={() => onNavigate(Page.Contact)} variant="glow" size="lg" className="mx-auto">

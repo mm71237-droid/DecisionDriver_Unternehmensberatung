@@ -1,9 +1,57 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '../components/Button';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 
 export const Contact: React.FC = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    company: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Define recipient
+    const recipient = "info@decisiondriver.at";
+    
+    // Create Subject Line
+    const subject = encodeURIComponent(`Projektanfrage: ${formData.company ? formData.company + ' - ' : ''}${formData.name}`);
+    
+    // Create Body Content
+    const bodyContent = `
+Liebes DecisionDriver Team,
+
+ich interessiere mich für ein Beratungsgespräch.
+
+Hier sind meine Kontaktdaten:
+Name: ${formData.name}
+Unternehmen: ${formData.company}
+E-Mail: ${formData.email}
+
+Meine Nachricht:
+${formData.message}
+
+Mit freundlichen Grüßen,
+${formData.name}
+    `.trim();
+    
+    const body = encodeURIComponent(bodyContent);
+    
+    // Open Email Client
+    window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+  };
+
   return (
     <div className="animate-fade-in pb-24 relative overflow-hidden bg-main">
        {/* Background Ambience */}
@@ -11,7 +59,7 @@ export const Contact: React.FC = () => {
           <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-100/50 rounded-full blur-[120px]"></div>
        </div>
 
-      <div className="py-20 relative z-10 border-b border-slate-200">
+      <div className="pt-40 pb-20 relative z-10 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900">Kontakt</h1>
           <p className="text-xl text-slate-900">
@@ -21,7 +69,7 @@ export const Contact: React.FC = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-16 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           
           {/* Contact Info */}
           <div className="space-y-10">
@@ -53,7 +101,7 @@ export const Contact: React.FC = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-slate-900 text-lg mb-1">E-Mail</h4>
-                  <a href="mailto:info@decisiondriver.at" className="text-slate-900 hover:text-primary transition-colors">
+                  <a href="mailto:info@decisiondriver.at" className="text-slate-900 hover:text-primary transition-colors block break-all">
                     info@decisiondriver.at
                   </a>
                 </div>
@@ -74,16 +122,19 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Form */}
-          <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-100 shadow-xl shadow-blue-900/5 relative overflow-hidden">
+          <div className="bg-white p-6 md:p-12 rounded-3xl border border-slate-100 shadow-xl shadow-blue-900/5 relative overflow-hidden">
              <div className="absolute top-0 right-0 w-64 h-64 bg-blue-50 blur-[80px] pointer-events-none"></div>
              
             <h3 className="text-2xl font-bold text-slate-900 mb-8 relative z-10">Beratungsgespräch anfragen</h3>
-            <form className="space-y-6 relative z-10" onSubmit={(e) => e.preventDefault()}>
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-2">Name</label>
                 <input 
                   type="text" 
                   id="name" 
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-slate-400"
                   placeholder="Ihr vollständiger Name"
                 />
@@ -94,6 +145,8 @@ export const Contact: React.FC = () => {
                 <input 
                   type="text" 
                   id="company" 
+                  value={formData.company}
+                  onChange={handleChange}
                   className="w-full px-4 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-slate-400"
                   placeholder="Ihr Unternehmen"
                 />
@@ -104,6 +157,9 @@ export const Contact: React.FC = () => {
                 <input 
                   type="email" 
                   id="email" 
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all placeholder-slate-400"
                   placeholder="name@unternehmen.de"
                 />
@@ -114,6 +170,9 @@ export const Contact: React.FC = () => {
                 <textarea 
                   id="message" 
                   rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-4 bg-slate-50 border border-slate-200 text-slate-900 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all resize-none placeholder-slate-400"
                   placeholder="Wie können wir Sie unterstützen?"
                 ></textarea>
@@ -124,7 +183,7 @@ export const Contact: React.FC = () => {
                 Anfrage absenden
               </Button>
               <p className="text-xs text-slate-500 text-center mt-4">
-                Ihre Daten werden vertraulich behandelt.
+                Es öffnet sich Ihr Standard-E-Mail-Programm (z.B. Outlook) mit den ausgefüllten Daten.
               </p>
             </form>
           </div>

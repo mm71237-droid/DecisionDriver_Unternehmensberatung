@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export enum Page {
@@ -6,7 +7,8 @@ export enum Page {
   BestPractices = 'BEST_PRACTICES',
   KeyNoteSpeaker = 'KEYNOTE_SPEAKER',
   About = 'ABOUT',
-  Contact = 'CONTACT'
+  Contact = 'CONTACT',
+  Impressum = 'IMPRESSUM'
 }
 
 export interface NavItem {
