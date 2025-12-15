@@ -37,7 +37,7 @@ const App: React.FC = () => {
       case Page.Contact:
         return <Contact />;
       case Page.Impressum:
-        return <Impressum />;
+        return <Impressum />; // No prop needed as we use standard anchor for Home link for simplicity or add if needed later
       default:
         return <Home onNavigate={handleNavigate} />;
     }

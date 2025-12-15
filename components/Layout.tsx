@@ -54,6 +54,17 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
     window.scrollTo(0, 0);
   };
 
+  const handleBlogClick = () => {
+      onNavigate(Page.About);
+      // Small timeout to allow page to mount
+      setTimeout(() => {
+          const blogSection = document.getElementById('blog');
+          if (blogSection) {
+              blogSection.scrollIntoView({ behavior: 'smooth' });
+          }
+      }, 100);
+  };
+
   const handleLogoClick = () => {
     handleNavClick(Page.Home);
     if (audioRef.current) {
@@ -463,7 +474,7 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
             </div>
             
             <div className="mt-8 border-t border-slate-100 pt-8 w-full max-w-xs text-sm text-slate-500">
-                <p>info@decisiondriver.at</p>
+                <a href="mailto:info@decisiondriver.at" className="hover:text-primary transition-colors">info@decisiondriver.at</a>
             </div>
            </div>
         </div>
@@ -503,7 +514,7 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
                <h4 className="text-white font-medium mb-6">Socials</h4>
                <ul className="space-y-4 text-slate-400 text-sm">
                   <li className="flex flex-col items-start gap-2">
-                     <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
+                     <a href="https://www.linkedin.com/in/maxmustermann" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">LinkedIn</a>
                      <button
                         onClick={() => setShowLinkedInPopup(true)}
                         className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#0a66c2] hover:bg-[#004182] text-white text-xs font-bold rounded-lg transition-all hover:scale-105 shadow-lg shadow-blue-900/20 group cursor-pointer"
@@ -512,8 +523,8 @@ export const Layout: React.FC<LayoutProps> = ({ currentPage, onNavigate, childre
                         <span>Latest Posts</span>
                      </button>
                   </li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Twitter / X</a></li>
-                  <li><a href="#" className="hover:text-primary transition-colors">Insights Blog</a></li>
+                  <li><a href="https://twitter.com" target="_blank" rel="noreferrer" className="hover:text-primary transition-colors">Twitter / X</a></li>
+                  <li><button onClick={handleBlogClick} className="hover:text-primary transition-colors text-left">Insights Blog</button></li>
                </ul>
             </div>
             <div>

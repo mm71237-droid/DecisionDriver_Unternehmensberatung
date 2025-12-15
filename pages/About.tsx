@@ -82,8 +82,8 @@ export const About: React.FC<AboutProps> = ({ onNavigate }) => {
                            </div>
                            <div className="text-sm font-medium text-slate-500 text-right space-y-1">
                               <p>📍 Salzburg, Österreich</p>
-                              <p>✉️ m.mustermann@decisiondriver.com</p>
-                              <p>🔗 linkedin.com/in/maxmustermann</p>
+                              <a href="mailto:m.mustermann@decisiondriver.com" className="block hover:text-[#0074D9]">✉️ m.mustermann@decisiondriver.com</a>
+                              <a href="https://www.linkedin.com/in/maxmustermann" target="_blank" rel="noopener noreferrer" className="block hover:text-[#0074D9]">🔗 linkedin.com/in/maxmustermann</a>
                            </div>
                         </div>
                      </header>

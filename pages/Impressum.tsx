@@ -31,7 +31,7 @@ export const Impressum: React.FC = () => {
               <p>
                 Tel: +43 662 123456<br />
                 E-Mail: <a href="mailto:info@decisiondriver.at" className="text-primary hover:underline">info@decisiondriver.at</a><br />
-                Web: www.decisiondriver.at
+                Web: <a href="/" className="text-primary hover:underline">www.decisiondriver.at</a>
               </p>
             </div>
           </div>
